@@ -1,0 +1,26 @@
+{
+  "sensitive_detector": {
+    "sensitive_words_file": "sensitive_words.txt",
+    "match_type": "str",
+    "case_sensitive": false,
+    "redact": true,
+    "contains_all": false
+  },
+  "api_client": {
+    "api_key": "sk-0255691784e8432b9f8f68350fb6ffbb",
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "model": "qwen-plus",
+    "max_tokens": 2000,
+    "temperature": 0.7
+  },
+  "safety": {
+    "check_input": true,
+    "check_output": true,
+    "log_blocked_requests": true
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "llm_guard.log",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  }
+}
