@@ -49,6 +49,14 @@ Thumbs.db
 .env
 config_local.json
 
+# Sensitive data files - DO NOT COMMIT
+sensitive_words.txt
+*敏感词*.txt
+*关键词*.xlsx
+（4）拦截关键词列表.xlsx
+sensitive_data/
+data/sensitive/
+
 # Cache
 .cache/
 .pytest_cache/

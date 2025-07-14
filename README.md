@@ -19,7 +19,27 @@
 pip install -r requirements.txt
 ```
 
-### 2. 配置API密钥
+### 2. 配置敏感词库
+
+**重要**: 敏感词数据文件不包含在仓库中，您需要自行准备：
+
+```bash
+# 方法1: 创建自己的敏感词文件
+cp sensitive_words_sample.txt sensitive_words.txt
+# 然后编辑 sensitive_words.txt，添加您的敏感词
+
+# 方法2: 从Excel文件导入（如果您有Excel格式的敏感词库）
+python -c "
+import pandas as pd
+df = pd.read_excel('your_sensitive_words.xlsx')
+words = df['关键词'].dropna().tolist()
+with open('sensitive_words.txt', 'w', encoding='utf-8') as f:
+    for word in words:
+        f.write(str(word) + '\n')
+"
+```
+
+### 3. 配置API密钥
 
 编辑 `.env` 文件或 `config.json` 文件，设置您的通义千问API密钥：
 
@@ -53,12 +73,13 @@ llm-guard/
 ├── main.py                    # 主程序入口
 ├── sensitive_word_detector.py # 敏感词检测模块
 ├── llm_api_client.py         # LLM API客户端
+├── demo.py                   # 演示程序
 ├── test_llm_guard.py         # 测试用例
 ├── config.json               # 配置文件
 ├── .env                      # 环境变量
 ├── requirements.txt          # 依赖列表
-├── sensitive_words.txt       # 敏感词列表
-├── （4）拦截关键词列表.xlsx    # 原始敏感词Excel文件
+├── sensitive_words_sample.txt # 敏感词示例文件
+├── sensitive_words.txt       # 敏感词列表（需自行创建）
 └── README.md                 # 使用文档
 ```
 
@@ -179,10 +200,18 @@ python test_llm_guard.py
 4. **详细日志**: 完整记录安全事件
 5. **灵活配置**: 可根据需求调整安全策略
 
+## 数据安全说明
+
+⚠️ **重要提醒**:
+- 敏感词数据文件（`sensitive_words.txt`）不包含在此仓库中
+- 请勿将包含真实敏感词的文件提交到公开仓库
+- 建议将敏感词文件存储在私有位置或使用环境变量配置路径
+- 本仓库提供的 `sensitive_words_sample.txt` 仅用于演示和测试
+
 ## 常见问题
 
 ### Q: 如何添加自定义敏感词？
-A: 编辑 `sensitive_words.txt` 文件，每行一个敏感词，或使用API动态添加。
+A: 创建 `sensitive_words.txt` 文件，每行一个敏感词，或使用API动态添加。参考 `sensitive_words_sample.txt` 示例。
 
 ### Q: 如何调整敏感词检测的严格程度？
 A: 修改配置文件中的 `match_type`、`case_sensitive` 等参数。
