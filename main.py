@@ -61,7 +61,7 @@ class LLMGuardSystem:
                 "contains_all": False
             },
             "api_client": {
-                "api_key": "sk-0255691784e8432b9f8f68350fb6ffbb",
+                "api_key": "sk-02556917ffbb",
                 "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
                 "model": "qwen-plus",
                 "max_tokens": 2000,
